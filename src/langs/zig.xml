@@ -1,0 +1,13 @@
+<language name="Zig">
+  <keywords>align,addrspace,allowzero,asm,comptime,const,export,extern,fn,inline,linksection,noalias,packed,pub,threadlocal,var,volatile,callconv,and,async,await,break,catch,continue,defer,else,errdefer,for,if,nosuspend,or,orelse,resume,return,suspend,switch,try,unreachable,while,error,anyerror,enum,struct,union,opaque,test,usingnamespace</keywords>
+  <literals>true,false,null,undefined,void,bool,anytype,anyframe,anyopaque,noreturn,type,isize,usize,f16,f32,f64,f80,f128,comptime_int,comptime_float,c_short,c_ushort,c_int,c_uint,c_long,c_ulong,c_longlong,c_ulonglong,c_longdouble,u8,i8,u16,i16,u32,i32,u64,i64,u128,i128</literals>
+  <comment line="//" block-start="/*" block-end="*/"/>
+  <string chars="&quot; '"/>
+  <colors>
+    <keyword>#FF8040</keyword>
+    <literal>#FF00FF</literal>
+    <string>#7ec699</string>
+    <comment>#008000</comment>
+    <number>#f08d49</number>
+  </colors>
+</language>

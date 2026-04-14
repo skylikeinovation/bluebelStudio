@@ -1,0 +1,13 @@
+<language name="Rust">
+  <keywords>as,break,const,continue,crate,else,enum,extern,false,fn,for,if,impl,in,let,loop,match,mod,move,mut,pub,ref,return,self,Self,static,struct,super,trait,true,type,unsafe,use,where,while,async,await,dyn</keywords>
+  <literals>true,false,None,Some,Ok,Err</literals>
+  <comment line="//" block-start="/*" block-end="*/"/>
+  <string chars="&quot;"/>
+  <colors>
+    <keyword>#cc99cd</keyword>
+    <literal>#f08d49</literal>
+    <string>#7ec699</string>
+    <comment>#999999</comment>
+    <number>#f08d49</number>
+  </colors>
+</language>

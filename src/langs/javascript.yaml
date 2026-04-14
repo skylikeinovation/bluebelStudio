@@ -1,0 +1,67 @@
+name: JavaScript
+
+keywords:
+  - break
+  - case
+  - catch
+  - class
+  - const
+  - continue
+  - debugger
+  - default
+  - delete
+  - do
+  - else
+  - export
+  - extends
+  - finally
+  - for
+  - function
+  - if
+  - import
+  - in
+  - instanceof
+  - let
+  - new
+  - return
+  - static
+  - super
+  - switch
+  - this
+  - throw
+  - try
+  - typeof
+  - var
+  - void
+  - while
+  - with
+  - yield
+  - async
+  - await
+  - of
+
+literals:
+  - true
+  - false
+  - null
+  - undefined
+  - NaN
+  - Infinity
+
+comment:
+  line: "//"
+  blockStart: "/*"
+  blockEnd: "*/"
+
+string:
+  chars:
+    - '"'
+    - "'"
+    - "`"
+
+colors:
+  keyword: "#cc99cd"
+  literal: "#f08d49"
+  string: "#7ec699"
+  comment: "#999999"
+  number: "#f08d49"

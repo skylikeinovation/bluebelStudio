@@ -21,28 +21,27 @@ jobs:
         run: make release-linux
 
 
-  windows:
-    name: Windows
-    runs-on: windows-latest
+windows:
+  name: Windows
+  runs-on: windows-latest
 
-    steps:
-      - uses: actions/checkout@v4
+  steps:
+    - uses: actions/checkout@v4
 
-      - name: Install Qt
-        shell: bash
-        run: |
-          python -m pip install aqtinstall
-          aqt install-qt windows desktop 6.8.0 win64_mingw -m qtwidgets
+    - name: Install Qt
+      shell: bash
+      run: |
+        python -m pip install aqtinstall
+        aqt install-qt windows desktop 6.8.0 win64_mingw -m qtbase
 
-      - name: Setup Qt
-        shell: bash
-        run: |
-          echo "$PWD/Qt/6.8.0/mingw_64/bin" >> $GITHUB_PATH
-          echo "PKG_CONFIG_PATH=$PWD/Qt/6.8.0/mingw_64/lib/pkgconfig" >> $GITHUB_ENV
+    - name: Setup Qt
+      shell: bash
+      run: |
+        echo "$PWD/Qt/6.8.0/mingw_64/bin" >> $GITHUB_PATH
+        echo "PKG_CONFIG_PATH=$PWD/Qt/6.8.0/mingw_64/lib/pkgconfig" >> $GITHUB_ENV
 
-      - name: Build
-        run: make release-windows
-
+    - name: Build
+      run: make release-windows
 
   mac:
     name: macOS

@@ -2,11 +2,9 @@
 
 #include <iostream>
 
-// Qt do sistema ou do SDK local
-#include "../libs/QtWidgets/QApplication"
-#include "../libs/QtWidgets/QMainWindow"
-#include "../libs/QtWidgets/QLabel"
-
+#include <QApplication>
+#include <QMainWindow>
+#include <QLabel>
 
 int main(int argc, char *argv[])
 {
@@ -14,8 +12,8 @@ int main(int argc, char *argv[])
 
     QMainWindow window;
 
-    QLabel label("Olá, Qt!", &window);
-    window.setCentralWidget(&label);
+    auto *label = new QLabel("Olá, Qt!", &window);
+    window.setCentralWidget(label);
 
     window.resize(800, 600);
     window.show();

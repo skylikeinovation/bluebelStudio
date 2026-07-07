@@ -9,31 +9,34 @@ LINUX_TARGET = $(BIN_DIR)/bluebelstudio
 WINDOWS_TARGET = $(BIN_DIR)/bluebelStudio.exe
 MAC_TARGET = $(BIN_DIR)/bluebelstudio-mac
 
-QT_CFLAGS = $(shell pkg-config --cflags Qt6Widgets)
-QT_LIBS = $(shell pkg-config --libs Qt6Widgets)
+QT = Qt6Widgets
 
 all: linux
 
+
 linux:
 	mkdir -p $(BIN_DIR)
-	$(CXX) $(SRC) -o $(LINUX_TARGET) $(QT_CFLAGS) $(QT_LIBS)
-
-release-linux: linux
-	rm -rf $(DIST_DIR)/pack-linux
-	mkdir -p $(DIST_DIR)/pack-linux/libs
-
-	cp $(LINUX_TARGET) $(DIST_DIR)/pack-linux/
-
-	cp $$(pkg-config --variable=libdir Qt6Core)/libQt6Core.so.6 $(DIST_DIR)/pack-linux/libs/
-	cp $$(pkg-config --variable=libdir Qt6Gui)/libQt6Gui.so.6 $(DIST_DIR)/pack-linux/libs/
-	cp $$(pkg-config --variable=libdir Qt6Widgets)/libQt6Widgets.so.6 $(DIST_DIR)/pack-linux/libs/
-
-	tar -czf $(DIST_DIR)/BluebelStudio-linux.tar.gz -C $(DIST_DIR) pack-linux
+	$(CXX) $(SRC) -o $(LINUX_TARGET) $$(pkg-config --cflags --libs $(QT))
 
 
 windows:
 	mkdir -p $(BIN_DIR)
-	x86_64-w64-mingw32-g++ $(SRC) -o $(WINDOWS_TARGET)
+	$(CXX) $(SRC) -o $(WINDOWS_TARGET) $$(pkg-config --cflags --libs $(QT))
+
+
+mac:
+	mkdir -p $(BIN_DIR)
+	$(CXX) $(SRC) -o $(MAC_TARGET) $$(pkg-config --cflags --libs $(QT))
+
+
+release-linux: linux
+	rm -rf $(DIST_DIR)/pack-linux
+	mkdir -p $(DIST_DIR)/pack-linux
+
+	cp $(LINUX_TARGET) $(DIST_DIR)/pack-linux/
+
+	tar -czf $(DIST_DIR)/BluebelStudio-linux.tar.gz \
+		-C $(DIST_DIR) pack-linux
 
 
 release-windows: windows
@@ -42,12 +45,8 @@ release-windows: windows
 
 	cp $(WINDOWS_TARGET) $(DIST_DIR)/pack-windows/
 
-	zip -r $(DIST_DIR)/BluebelStudio-windows.zip -j $(DIST_DIR)/pack-windows/*
-
-
-mac:
-	mkdir -p $(BIN_DIR)
-	clang++ $(SRC) -o $(MAC_TARGET)
+	zip -r $(DIST_DIR)/BluebelStudio-windows.zip \
+		$(DIST_DIR)/pack-windows
 
 
 release-mac: mac
@@ -56,7 +55,8 @@ release-mac: mac
 
 	cp $(MAC_TARGET) $(DIST_DIR)/pack-mac/
 
-	tar -czf $(DIST_DIR)/BluebelStudio-mac.tar.gz -C $(DIST_DIR) pack-mac
+	tar -czf $(DIST_DIR)/BluebelStudio-mac.tar.gz \
+		-C $(DIST_DIR) pack-mac
 
 
 run: linux
@@ -68,4 +68,4 @@ clean:
 	rm -rf $(DIST_DIR)
 
 
-.PHONY: all linux release-linux windows release-windows mac release-mac run clean
+.PHONY: all linux windows mac release-linux release-windows release-mac run clean

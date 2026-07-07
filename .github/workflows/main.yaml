@@ -2,30 +2,48 @@ name: Build BluebelStudio
 
 on:
   push:
-    tags:
-      - "v*"
 
 jobs:
   linux:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt install qt6-base-dev -y
-      - run: make release-linux
+
+      - name: Install Qt
+        run: |
+          sudo apt update
+          sudo apt install -y qt6-base-dev pkg-config
+
+      - name: Build Linux
+        run: make release-linux
+
 
   windows:
     runs-on: windows-latest
+
     steps:
       - uses: actions/checkout@v4
-      - run: make release-windows
+
+      - name: Install Qt
+        run: |
+          python -m pip install aqtinstall
+          aqt install-qt windows desktop 6.8.0 win64_mingw -m qtwidgets
+
+      - name: Build Windows
+        run: make release-windows
+
 
   mac:
     runs-on: macos-latest
+
     steps:
       - uses: actions/checkout@v4
-      - run: make release-mac
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: BluebelStudio-mac
-          path: dist/
+      - name: Install Qt
+        run: |
+          python3 -m pip install aqtinstall
+          aqt install-qt mac desktop 6.8.0 clang_64 -m qtwidgets
+
+      - name: Build macOS
+        run: make release-mac

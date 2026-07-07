@@ -24,23 +24,19 @@ jobs:
         with:
           name: BluebelStudio-linux
           path: dist/
+windows:
+  runs-on: windows-latest
 
+  steps:
+    - uses: actions/checkout@v4
 
-  windows:
-    name: Build Windows
-    runs-on: windows-latest
+    - name: Instalar Qt
+      run: |
+        pip install aqtinstall
+        aqt install-qt windows desktop 6.8.0 win64_mingw -m qtwidgets
 
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build
-        run: make release-windows
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: BluebelStudio-windows
-          path: dist/
-
+    - name: Build
+      run: make release-windows
 
   mac:
     name: Build macOS

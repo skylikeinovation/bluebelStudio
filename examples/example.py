@@ -1,4 +1,4 @@
-const std = @import("std")
-pub fn main() !void {
-    std.debug.print("olá!\n", .{});
-    }
+def main():
+    print("hello, BluebelStudio")
+if __name__ == main:
+    main()

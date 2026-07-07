@@ -37,10 +37,18 @@ windows:
 
     - name: Build
       run: make release-windows
+mac:
+  runs-on: macos-latest
 
-  mac:
-    name: Build macOS
-    runs-on: macos-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Instalar Qt
+      run: |
+        brew install qt
+
+    - name: Build
+      run: make release-mac
 
     steps:
       - uses: actions/checkout@v4

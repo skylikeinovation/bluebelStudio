@@ -5,5 +5,6 @@
 * agora mais leve ainda!
 * suporte a windows, linux e mac
 * extensões em lua
-  ### linux
-  * novo instalador opensource usermode
+* novo instalador opensource usermode
+## dependencias
+*c++ iostream

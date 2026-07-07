@@ -6,55 +6,24 @@ on:
       - "v*"
 
 jobs:
-
   linux:
-    name: Build Linux
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+      - run: sudo apt install qt6-base-dev -y
+      - run: make release-linux
 
-      - name: Instalar Qt
-        run: sudo apt install qt6-base-dev -y
-
-      - name: Build
-        run: make release-linux
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: BluebelStudio-linux
-          path: dist/
-windows:
-  runs-on: windows-latest
-
-  steps:
-    - uses: actions/checkout@v4
-
-    - name: Instalar Qt
-      run: |
-        pip install aqtinstall
-        aqt install-qt windows desktop 6.8.0 win64_mingw -m qtwidgets
-
-    - name: Build
-      run: make release-windows
-mac:
-  runs-on: macos-latest
-
-  steps:
-    - uses: actions/checkout@v4
-
-    - name: Instalar Qt
-      run: |
-        brew install qt
-
-    - name: Build
-      run: make release-mac
-
+  windows:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - run: make release-windows
 
-      - name: Build
-        run: make release-mac
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make release-mac
 
       - uses: actions/upload-artifact@v4
         with:

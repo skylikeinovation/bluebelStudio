@@ -7,4 +7,4 @@
 * extensões em lua
 * novo instalador opensource usermode
 ## dependencias
-*c++ iostream
+* c++ iostream
